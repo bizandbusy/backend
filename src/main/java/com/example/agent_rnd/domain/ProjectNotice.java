@@ -21,14 +21,12 @@ public class ProjectNotice {
     @Column(name = "notice_id")
     private Long id;
 
-    // ===============================================
-    // 2. 관리용 FK (수정됨: API 데이터일 수 있으므로 Null 허용!)
-    // ===============================================
-    @Column(name = "user_id", nullable = true)
-    private Long userId;
+    // [삭제 완료] user_id 필드 제거!
+    // 공고는 누구의 소유가 아닌 공공 데이터
+    // 사용자와의 연결은 오직 'Draft' 테이블을 통해서만 이루어짐
 
     // ===============================================
-    // 3. API 데이터 (물리명 snake_case 적용)
+    // 2. API 데이터
     // ===============================================
 
     // [필수] 고유번호는 꼭 있어야 함
@@ -39,7 +37,7 @@ public class ProjectNotice {
     @Column(nullable = false, length = 500)
     private String title;
 
-    // [선택] 링크가 가끔 누락될 수 있음 -> Nullable
+    // [선택] 링크가 가끔 누락될 수 있음
     @Column(length = 1000)
     private String link;
 
@@ -68,7 +66,7 @@ public class ProjectNotice {
     @Column(name = "trget_nm", length = 200)
     private String trgetNm;
 
-    // [선택] 파일이 없는 공고도 많음! (N -> Y 필수)
+    // [선택] 파일이 없는 공고도 많음!
     @Column(name = "print_flpth_nm", length = 500)
     private String printFlpthNm;
 
@@ -80,6 +78,9 @@ public class ProjectNotice {
     @Column(name = "hash_tags", length = 500)
     private String hashTags;
 
+    // ===============================================
+    // 3. 메타 데이터
+    // ===============================================
 
     @CreationTimestamp
     @Column(name = "created_at", nullable = false, updatable = false)

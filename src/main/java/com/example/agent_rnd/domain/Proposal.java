@@ -13,14 +13,15 @@ import java.time.LocalDateTime;
 @Builder
 public class Proposal {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "proposal_id")
     private Long id;
 
     @Column(name = "user_id")
     private Long userId;
 
-    // [연결 1] 어떤 공고인지 (삼각형 구조)
+    // [연결 1] 어떤 공고인지
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "notice_id", nullable = false)
     private ProjectNotice projectNotice;

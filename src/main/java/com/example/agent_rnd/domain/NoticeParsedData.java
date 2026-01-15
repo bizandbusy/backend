@@ -13,7 +13,8 @@ import java.time.LocalDateTime;
 @Builder
 public class NoticeParsedData {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "parsed_id")
     private Long id;
 
