@@ -1,32 +1,56 @@
 package com.example.agent_rnd.domain.notice;
 
-import com.example.agent_rnd.domain.common.BaseTimeEntity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import java.time.LocalDateTime;
 
 @Entity
 @Getter
 @NoArgsConstructor
-@Table(name = "PROJECT_NOTICES")
-public class ProjectNotice extends BaseTimeEntity {
+@Table(name = "project_notices")
+public class ProjectNotice {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "notice_id")
     private Long id;
 
-    @Column(nullable = false)
+    @Column(name = "seq")
+    private String seq;
+
+    @Column(name = "title", nullable = false)
     private String title;
 
-    private String agency; // 전담기관
-
-    private LocalDateTime startDate;
-    private LocalDateTime endDate;
-
-    @Column(columnDefinition = "TEXT")
+    @Column(name = "link", columnDefinition = "TEXT")
     private String url;
 
-    @Enumerated(EnumType.STRING)
-    private NoticeStatus status; // OPEN, CLOSED
+    @Column(name = "author")
+    private String author;
+
+    @Column(name = "excInsttNm")
+    private String agency;
+
+    @Lob
+    @Column(name = "description")
+    private String description;
+
+    @Column(name = "pubDate")
+    private String pubDate;
+
+    @Column(name = "reqstDt")
+    private String requestPeriod;
+
+    @Column(name = "trgetNm", columnDefinition = "TEXT")
+    private String targetName;
+
+    @Column(name = "printFlpthNm", columnDefinition = "TEXT")
+    private String filePath;
+
+    @Column(name = "printFileNm", columnDefinition = "TEXT")
+    private String fileName;
+
+    @Column(name = "hashTags", columnDefinition = "TEXT")
+    private String hashTags;
+
+    @Transient
+    public String getStatus() { return "OPEN"; }
 }

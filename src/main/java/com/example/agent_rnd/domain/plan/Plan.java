@@ -8,20 +8,21 @@ import java.math.BigDecimal;
 @Entity
 @Getter
 @NoArgsConstructor
-@Table(name = "PLANS")
+@Table(name = "plans")
 public class Plan {
 
     @Id
     @Column(name = "plan_id")
-    private Integer id; // PK가 INT 형이므로 Integer
+    private Integer id;
 
     @Column(name = "plan_name", length = 50, nullable = false)
     private String planName;
 
-    @Column(precision = 10, scale = 2)
+    @Column(precision = 10, scale = 2, nullable = false)
     private BigDecimal price;
 
-    @Column(name = "is_downloadbale") // SQL 컬럼명(오타) 유지 or DB수정 후 맞춤
+    // [수정 완료] DB 오타를 수정
+    @Column(name = "is_downloadable", nullable = false)
     private Boolean isDownloadable;
 
     @Column(name = "preview_page")

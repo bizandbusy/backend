@@ -1,29 +1,37 @@
 package com.example.agent_rnd.domain.draft;
 
-import com.example.agent_rnd.domain.common.BaseTimeEntity;
 import com.example.agent_rnd.domain.user.User;
-import com.example.agent_rnd.domain.template.ProposalTemplate;
+import com.example.agent_rnd.domain.notice.ProjectNotice;
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import java.time.LocalDateTime;
 
 @Entity
 @Getter
-@Table(name = "DRAFTS")
-public class Draft extends BaseTimeEntity {
+@NoArgsConstructor
+@Table(name = "drafts")
+public class Draft {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
     @Column(name = "draft_id")
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    // [핵심] 이 초안이 어떤 양식의 질문에 대한 답변인지 연결
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "template_id")
-    private ProposalTemplate template;
+    @JoinColumn(name = "notice_id", nullable = false)
+    private ProjectNotice projectNotice;
 
-    @Column(columnDefinition = "JSON")
-    private String contentJson; // { "q_1": "답변...", "q_2": "답변..." }
+    @Column(name = "title")
+    private String title;
+
+    @Lob
+    @Column(name = "content", nullable = false)
+    private String content;
+
+    @Column(name = "created_at", nullable = false)
+    private LocalDateTime createdAt;
 }

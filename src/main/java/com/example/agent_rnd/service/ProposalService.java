@@ -20,12 +20,11 @@ public class ProposalService {
 
     // 1. 내 제안서 목록 조회
     public List<Proposal> getMyProposals(Long userId) {
-        // 유저가 진짜 있는지 확인
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 회원입니다."));
 
-        // 그 유저의 제안서 가져오기
-        return proposalRepository.findByUserOrderByCreatedAtDesc(user);
+        // [수정] ID 역순 정렬 호출
+        return proposalRepository.findByUserOrderByIdDesc(user);
     }
 
     // 2. 제안서 상세 조회
