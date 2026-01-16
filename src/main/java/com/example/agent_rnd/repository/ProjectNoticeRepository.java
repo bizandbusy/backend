@@ -7,9 +7,9 @@ import java.util.List;
 
 public interface ProjectNoticeRepository extends JpaRepository<ProjectNotice, Long> {
 
-    // 1. "모집 중(OPEN)"인 공고만 최신순으로 조회
-    List<ProjectNotice> findByStatusOrderByStartDateDesc(NoticeStatus status);
+    // "모든 공고를 등록일 역순"으로 조회
+    List<ProjectNotice> findAllByOrderByPubDateDesc();
 
-    // 2. 제목으로 공고 검색 (예: "AI", "데이터" 등)
+    // 2. 제목 검색
     List<ProjectNotice> findByTitleContaining(String keyword);
 }

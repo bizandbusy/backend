@@ -23,7 +23,7 @@ public class ProposalService {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 회원입니다."));
 
-        // [수정] ID 역순 정렬 호출
+        // [수정] CreatedAt -> Id 역순 정렬 호출
         return proposalRepository.findByUserOrderByIdDesc(user);
     }
 
