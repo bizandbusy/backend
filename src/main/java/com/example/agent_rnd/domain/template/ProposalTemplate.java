@@ -1,6 +1,5 @@
 package com.example.agent_rnd.domain.template;
 
-import com.example.agent_rnd.domain.common.BaseTimeEntity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import java.util.ArrayList;
@@ -9,19 +8,24 @@ import java.util.List;
 @Entity
 @Getter
 @Table(name = "PROPOSAL_TEMPLATES")
-public class ProposalTemplate extends BaseTimeEntity {
+public class ProposalTemplate { // 상속(BaseTimeEntity)은 이미 제거된 상태여야 합니다.
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "template_id")
     private Long id;
 
+    // [수정] DB의 file_name 컬럼과 매핑
+    @Column(name = "file_name")
     private String fileName;
-    private String filePath; // S3 URL
 
-    @Column(columnDefinition = "JSON")
-    private String structureJson; // 파싱된 전체 구조
+    // [수정] DB의 file_path 컬럼과 매핑
+    @Column(name = "file_path")
+    private String filePath;
 
-    // 양식 하나에 질문 여러 개 (1:N)
+    // [수정] DB의 structure_json 컬럼과 매핑
+    @Column(name = "structure_json", columnDefinition = "JSON")
+    private String structureJson;
+
     @OneToMany(mappedBy = "template", cascade = CascadeType.ALL)
     private List<TemplateQuestion> questions = new ArrayList<>();
 }

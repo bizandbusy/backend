@@ -13,15 +13,17 @@ public class TemplateQuestion {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "template_id")
+    @JoinColumn(name = "template_id") // DB 컬럼명 확인 완료
     private ProposalTemplate template;
 
-    private Integer sectionNo; // 1, 2, 3...
-    private String topic;      // "개발 동기"
+    @Column(name = "section_no") // [수정] DB의 section_no와 매핑
+    private Integer sectionNo;
+
+    private String topic;
 
     @Column(columnDefinition = "TEXT")
-    private String content;    // 실제 질문 내용
+    private String content;
 
     @Column(columnDefinition = "TEXT")
-    private String guide;      // 작성 가이드
+    private String guide;
 }

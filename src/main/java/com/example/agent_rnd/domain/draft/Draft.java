@@ -29,7 +29,8 @@ public class Draft {
     private String title;
 
     @Lob
-    @Column(name = "content", nullable = false)
+    // [수정] columnDefinition = "LONGTEXT" 추가!
+    @Column(name = "content", nullable = false, columnDefinition = "LONGTEXT")
     private String content;
 
     @Column(name = "created_at", nullable = false)

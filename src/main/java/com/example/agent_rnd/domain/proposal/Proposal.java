@@ -37,7 +37,8 @@ public class Proposal {
     private String title;
 
     @Lob
-    @Column(name = "final_content", nullable = false)
+    // [수정] 여기도 LONGTEXT 명시!
+    @Column(name = "final_content", nullable = false, columnDefinition = "LONGTEXT")
     private String finalContent;
 
     @Column(length = 20)

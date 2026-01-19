@@ -26,16 +26,18 @@ public class ProjectNotice {
     @Column(name = "author")
     private String author;
 
+    // [수정] DB의 컬럼명인 excInsttNm과 정확히 일치시킵니다.
     @Column(name = "excInsttNm")
     private String agency;
 
     @Lob
-    @Column(name = "description")
+    @Column(name = "description", columnDefinition = "LONGTEXT")
     private String description;
 
     @Column(name = "pubDate")
     private String pubDate;
 
+    // [수정] 다른 카멜케이스 컬럼들도 안전하게 name을 명시합니다.
     @Column(name = "reqstDt")
     private String requestPeriod;
 

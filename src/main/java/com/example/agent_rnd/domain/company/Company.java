@@ -1,6 +1,5 @@
 package com.example.agent_rnd.domain.company;
 
-import com.example.agent_rnd.domain.common.BaseTimeEntity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,7 +9,7 @@ import java.time.LocalDateTime;
 @Getter
 @NoArgsConstructor
 @Table(name = "COMPANIES")
-public class Company extends BaseTimeEntity {
+public class Company {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "company_id")
@@ -20,12 +19,17 @@ public class Company extends BaseTimeEntity {
     private String name;
 
     @Column(name = "business_reg_no", length = 20, nullable = false)
-    private String businessRegNo; // 사업자등록번호
+    private String businessRegNo;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "contract_status", length = 20)
-    private ContractStatus contractStatus; // ACTIVE, EXPIRED 등
+    private ContractStatus contractStatus;
 
-    private LocalDateTime startDate; // 계약 시작일
-    private LocalDateTime endDate;   // 계약 종료일
+    // [수정] DB 컬럼명인 start_date와 매핑
+    @Column(name = "start_date")
+    private LocalDateTime startDate;
+
+    // [수정] DB 컬럼명인 end_date와 매핑
+    @Column(name = "end_date")
+    private LocalDateTime endDate;
 }
